@@ -1,0 +1,134 @@
+body {
+  font-family: 'Tajawal', sans-serif;
+  margin: 0;
+  background:linear-gradient(90deg, #303030, #141313);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+.main-header {
+  background: linear-gradient(90deg, #1f1d1d, #1f1d1d);
+  color: white;
+  padding: 1rem 0;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+.hero-section {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.btn {
+  background: #575757;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.product-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+.product-card h3 {
+  margin: 1rem 0 0.5rem;
+}
+.price {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.footer {
+  margin-top: auto;
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+.modal {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+.modal-content input {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.modal-content button {
+  background: #575757;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+.hidden { display: none; }
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.contact-form button {
+  background: #575757;
+  color: white;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
