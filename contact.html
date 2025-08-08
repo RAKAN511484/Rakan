@@ -2,39 +2,210 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>تواصل معنا | كود ستور</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>تواصل معنا - كود ستور</title>
+  <style>
+    /* نفس تصميم صفحة من نحن */
+    :root{
+      --bg:#0b0b0b;
+      --panel:#0f1113;
+      --muted:#9aa0a6;
+      --accent:#c7c7c7;
+      --primary:#e6e6e6;
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --gold: #d4af37;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0}
+    body{
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(180deg,var(--bg),#050506);
+      color:var(--primary);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      direction: rtl;
+    }
+
+    /* Container */
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+
+    /* Header */
+    .site-header{
+      background: linear-gradient(90deg,#070708, #0d0e10);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding:18px 0;
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between}
+    .brand .tag{font-size:12px;color:var(--muted)}
+    .logo{font-weight:800;font-size:22px;letter-spacing:1px}
+    .logo .accent{color:var(--gold)}
+
+    /* Navigation */
+    .main-nav a{
+      color:var(--muted);
+      text-decoration:none;
+      margin-left:18px;
+      font-weight:600;
+      transition: color 0.3s;
+    }
+    .main-nav a:hover, .main-nav a.active{
+      color:var(--primary);
+    }
+
+    /* Page title */
+    .page-title{
+      font-size: 28px;
+      margin: 0 0 20px 0;
+      color: var(--gold);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    /* Form styles */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.03);
+      background: transparent;
+      color: var(--primary);
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--primary);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    #form-response {
+      margin-top: 20px;
+      color: var(--gold);
+      font-weight: 700;
+      display: none;
+      text-align: center;
+    }
+
+    /* Footer */
+    .site-footer{
+      padding: 18px 0;
+      border-top:1px solid rgba(255,255,255,0.02);
+      margin-top: 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width:700px){
+      .page-title{
+        font-size: 24px;
+      }
+      form {
+        padding: 0 10px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="main-header">
-    <div class="container nav-container">
-      <h1 class="logo">كود ستور</h1>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="products.html">المنتجات</a></li>
-          <li><a href="about.html">من نحن</a></li>
-          <li><a href="contact.html">تواصل معنا</a></li>
-        </ul>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1 class="logo">كود <span class="accent">ستور</span></h1>
+        <span class="tag">متجر برمجي فاخر</span>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html" class="active">تواصل معنا</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
-    <h2>تواصل معنا</h2>
-    <form action="https://formsubmit.co/altybyr594@gmail.com" method="POST" class="contact-form">
-      <input type="text" name="الاسم" placeholder="اسمك" required>
-      <input type="email" name="البريد" placeholder="بريدك الإلكتروني" required>
-      <textarea name="الرسالة" rows="6" placeholder="اكتب رسالتك هنا..." required></textarea>
+    <h2 class="page-title">تواصل معنا</h2>
+    <form id="contact-form">
+      <label for="name">الاسم</label>
+      <input type="text" id="name" name="name" required placeholder="أدخل اسمك" />
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" required placeholder="example@mail.com" />
+
+      <label for="message">رسالتك</label>
+      <textarea id="message" name="message" rows="5" required placeholder="اكتب رسالتك هنا"></textarea>
+
       <button type="submit">إرسال</button>
     </form>
+
+    <p id="form-response"></p>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 كود ستور - جميع الحقوق محفوظة</p>
-    </div>
+  <footer class="site-footer">
+    © 2025 كود ستور | جميع الحقوق محفوظة
   </footer>
+
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = this.name.value.trim();
+      const email = this.email.value.trim();
+      const message = this.message.value.trim();
+      const responseEl = document.getElementById('form-response');
+
+      if (!name || !email || !message) {
+        alert('يرجى تعبئة كل الحقول!');
+        return;
+      }
+
+      fetch('https://formsubmit.co/ajax/altybyr594@gmail.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success === 'true' || data.success === true) {
+          responseEl.textContent = 'شكراً لتواصلك معنا، سنرد عليك قريباً.';
+          responseEl.style.display = 'block';
+          this.reset();
+        } else {
+          alert('حدث خطأ أثناء الإرسال، حاول مرة أخرى.');
+        }
+      })
+      .catch(() => alert('حدث خطأ أثناء الإرسال، تحقق من اتصالك بالإنترنت.'));
+    });
+  </script>
 </body>
 </html>
