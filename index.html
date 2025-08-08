@@ -1,36 +1,83 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <title>كود ستور</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>كود ستور — متجر البرمجيات الفاخر</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="main-header">
-    <div class="container nav-container">
-      <h1 class="logo">كود ستور</h1>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html">الرئيسية</a></li>
-          <li><a href="products.html">المنتجات</a></li>
-          <li><a href="about.html">من نحن</a></li>
-          <li><a href="contact.html">تواصل معنا</a></li>
-        </ul>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">كود <span class="accent">ستور</span></div>
+        <div class="tag">متجر الحلول البرمجية الفاخر</div>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل</a>
       </nav>
     </div>
   </header>
 
-  <main class="hero-section container">
-    <h2>مرحبا بك في كود ستور</h2>
-    <p>نوفر لك احدث المنتجات الرقميه الحديثه متجر مضمون و منتجات رائعه</p>
-    <a class="btn" href="products.html">استعرض المنتجات</a>
+  <main>
+    <!-- Hero / Banner -->
+    <section class="hero">
+      <div class="hero-inner container">
+        <h1 class="hero-title">متجر كود ستور الممتاز</h1>
+        <p class="hero-sub">منتجات احترافية — جوده ممتازه — متجر موثوق</p>
+        <div class="hero-cta">
+          <a href="products.html" class="btn btn-primary">استعرض المنتجات</a>
+          <a href="#featured" class="btn btn-ghost">منتجات مميزة</a>
+        </div>
+      </div>
+      <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Featured products -->
+    <section id="featured" class="featured container">
+      <h2 class="section-title">منتجات مميزة</h2>
+      <div id="featured-products" class="grid"></div>
+      <div class="center">
+        <a href="products.html" class="btn btn-outline">عرض جميع المنتجات</a>
+      </div>
+    </section>
+
+    <!-- categories quick links -->
+    <section class="categories container">
+      <div class="cat-grid">
+        <a class="cat-card" href="products.html" data-cat="fivem"><strong>Fivem</strong><span>أكواد ومودات</span></a>
+        <a class="cat-card" href="products.html" data-cat="subscriptions"><strong>اشتراكات</strong><span>خدمات شهرية</span></a>
+        <a class="cat-card" href="products.html" data-cat="discord"><strong>Discord</strong><span>بوتات وplugins</span></a>
+        <a class="cat-card" href="products.html" data-cat="websites"><strong>مواقع</strong><span>واجهات ومواقع كاملة</span></a>
+        <a class="cat-card" href="products.html" data-cat="designs"><strong>العاب</strong><span>العاب مميزه</span></a>
+      </div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 كود ستور - جميع الحقوق محفوظة</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 كود ستور — جميع الحقوق محفوظة</div>
+      <div class="foot-note">ملاحظة: الطلبات لا تشمل الدفع، سيتم التواصل لإتمام الدفع والتسليم.</div>
     </div>
   </footer>
+
+  <script src="scripts.js"></script>
+  <script>
+    // render featured after scripts loaded
+    renderFeaturedProducts();
+    // category quick links redirect with focus
+    document.querySelectorAll('.cat-card').forEach(el=>{
+      el.addEventListener('click', e=>{
+        e.preventDefault();
+        const cat = el.dataset.cat;
+        // open products.html and pass hash with category name
+        window.location.href = `products.html#${cat}`;
+      });
+    });
+  </script>
 </body>
 </html>
