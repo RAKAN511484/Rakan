@@ -7,7 +7,7 @@ const productsDB = {
   fivem: [
     {name:'خزنه الاسلحه فايف ام',desc:'خزنه مليئه بل اسلحه المميزه',price:50,image:'https://media.discordapp.net/attachments/1222409323909615706/1403048437234270300/Screenshot_2025-05-15_084157.png?ex=6896caee&is=6895796e&hm=ef897362c7973baec8e1884db1a35a28a0c13ca4c068fbbb778b25959bd706b1&=&format=webp&quality=lossless'},
     {name:'بحث الاسلحه',desc:'تفتح لك متجر بي اسم الايتم الذي وضعته',price:12,image:'https://media.discordapp.net/attachments/1222409323909615706/1403050027147857991/Screenshot_2025-08-07_091944.png?ex=6896cc69&is=68957ae9&hm=0824c41d83435ec67fe0eb15ede5838c9bbb94aa57bfeabec01d5f82dbfd63a7&=&format=webp&quality=lossless'},
-    {name:'اكواد تفعيل روكستار',desc:'اشتر الاكواد و ابدا حياه جديده في قراند 5',price:4,image:'https://i.ytimg.com/vi/tzOfXCpsw0k/hqdefault.jpg'},
+    {name:'اكواد تفعيل روكستار',desc:'اشتر الاكواد و ابدا حياه جديده في قراند 5',price:5,image:'https://i.ytimg.com/vi/tzOfXCpsw0k/hqdefault.jpg'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
@@ -226,6 +226,7 @@ document.querySelector('.modal-close').addEventListener('click', () => {
   document.querySelector('.overlay').classList.remove('active');
   document.querySelector('.order-modal').classList.remove('active');
 });
+
 
 
 
