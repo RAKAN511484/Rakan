@@ -1,254 +1,80 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>المنتجات | كود ستور</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      font-family: 'Tajawal', sans-serif;
-      margin: 0;
-      background: #141313;
-      color: #222;
-    }
-    header {
-      background: #1f1d1d;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header .logo {
-      font-weight: 900;
-      font-size: 1.8rem;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      gap: 1rem;
-    }
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 700;
-    }
-    nav ul li a:hover {
-      text-decoration: underline;
-    }
-    .products-section {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .product-card {
-      background: white;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease;
-    }
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-    .product-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 0.75rem;
-    }
-    .product-card h3 {
-      margin: 0.5rem 0;
-      font-weight: 700;
-    }
-    .product-card p {
-      font-size: 0.9rem;
-      color: #555;
-      min-height: 40px;
-    }
-    .product-card .price {
-      margin-top: 0.75rem;
-      font-weight: 700;
-      color: #1f1d1d;
-      font-size: 1.1rem;
-    }
-    .product-card button {
-      margin-top: 1rem;
-      background-color: #575757;
-      color: white;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-    }
-    .product-card button:hover {
-      background-color: #575757;
-    }
-
-    /* نافذة طلب المنتج */
-    #order-popup {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      z-index: 9999;
-      width: 90%;
-      max-width: 420px;
-    }
-    #order-popup.active {
-      display: block;
-    }
-    #order-popup h3 {
-      margin-top: 0;
-      margin-bottom: 1.5rem;
-      font-weight: 900;
-      font-size: 1.5rem;
-      color: #292929;
-    }
-    #order-popup input {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      margin-bottom: 1rem;
-      font-size: 1rem;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-    #order-popup button[type="submit"] {
-      width: 100%;
-      padding: 0.8rem;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: white;
-      background-color: #575757;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #order-popup button[type="submit"]:hover {
-      background-color: #575757;
-    }
-
-    /* خلفية معتمة خلف النافذة */
-    #order-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9998;
-    }
-    #order-overlay.active {
-      display: block;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>المنتجات — كود ستور</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header class="site-header slim">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">كود <span class="accent">ستور</span></div>
+      </div>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="products.html" class="active">المنتجات</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html">تواصل</a>
+      </nav>
+    </div>
+  </header>
 
-<header>
-  <div class="logo">كود ستور</div>
-  <nav>
-    <ul>
-      <li><a href="index.html">الرئيسية</a></li>
-      <li><a href="products.html" style="text-decoration: underline;">المنتجات</a></li>
-      <li><a href="about.html">من نحن</a></li>
-      <li><a href="contact.html">تواصل معنا</a></li>
-    </ul>
-  </nav>
-</header>
+  <main class="container">
+    <section class="products-top">
+      <h1 class="page-title">جميع المنتجات</h1>
+      <p class="muted">اختر التصنيف لعرض منتجاته. كل تصنيف يحتوي على 10 منتجات عالية الجودة.</p>
 
-<main>
-  <section class="products-section" id="products">
-    <!-- المنتجات ستظهر هنا بواسطة جافاسكريبت -->
-  </section>
-</main>
+      <div class="tabs" role="tablist">
+        <button class="tab" data-cat="fivem">Fivem</button>
+        <button class="tab" data-cat="subscriptions">اشتراكات</button>
+        <button class="tab" data-cat="discord">Discord</button>
+        <button class="tab" data-cat="websites">مواقع</button>
+        <button class="tab" data-cat="designs">العاب</button>
+      </div>
+    </section>
 
-<!-- نافذة طلب المنتج -->
-<div id="order-popup">
-  <h3>طلب المنتج</h3>
-  <form id="order-form" action="https://formsubmit.co/altybyr594@gmail.com" method="POST" target="_blank">
-    <input type="hidden" name="منتج" id="hidden-product" value="" />
-    <input type="text" name="الاسم" placeholder="اسمك" required />
-    <input type="text" name="التواصل" placeholder="رقم الهاتف أو البريد الإلكتروني" required />
-    <button type="submit">إرسال</button>
-  </form>
-</div>
+    <section id="products-section" class="products-grid">
+      <!-- المنتجات ستُعرض هنا -->
+    </section>
+  </main>
 
-<div id="order-overlay"></div>
+  <!-- Order modal (formsubmit -> email) -->
+  <div id="order-overlay" class="overlay"></div>
 
-<script>
-  const products = [
-    { name: 'ثغره خزنه اسلحه فايف ام', desc: 'تفتح لك خزنه مليئه بل ايتمات الرائعه في Fivem', price: 50, image: 'https://media.discordapp.net/attachments/1222409323909615706/1403048437234270300/Screenshot_2025-05-15_084157.png?ex=6896222e&is=6894d0ae&hm=e3c2ac8e4a265762134119ab1e31f70d9aa4a1552de5dc91384881f13d1e0910&=&format=webp&quality=lossless' },
-    { name: 'بحث عن ايتمات', desc: 'تكتب اسم الايتم و يفتح لك شوب فيه الايتم مجانا', price: 15, image: 'https://media.discordapp.net/attachments/1222409323909615706/1403050027147857991/Screenshot_2025-08-07_091944.png?ex=689623a9&is=6894d229&hm=7bb3903fab50dbf5eda381a7db2e0d30587829e9d55bdbf58ca983b9ef35cc46&=&format=webp&quality=lossless' },
-    { name: 'انشاء موقع الكتروني للتعريف بنفسك', desc: 'نقوم بعمل موقع الكتروني للتعريف عن نفسك ملاحضه نعطيك سكربتها فقط ليس لنا علاقه بل خوادم', price: 8, image: 'https://secure.unified.ph/assets/login_new/images/icons/Username-01.png' },
-    { name: 'قريبا', desc: 'قريبا', price: 0, image: 'https://1.bp.blogspot.com/-xUGA96OWWI4/X6re3K0JkqI/AAAAAAAANoY/Gv9pwdRFTZYcfiVXv87UhVeyAsyeQW2ywCLcBGAsYHQ/s1036/%25D8%25B5%25D9%2588%25D8%25B1%25D8%25A9%2B%25D8%25B9%25D9%2584%25D8%25A7%25D9%2585%25D8%25A9%2B%25D8%25A7%25D8%25B3%25D8%25AA%25D9%2581%25D9%2587%25D8%25A7%25D9%2585%2BPNG%2B%25285%2529.jpg' },
-    { name: 'قريبا', desc: 'قريبا', price: 0, image: 'https://1.bp.blogspot.com/-xUGA96OWWI4/X6re3K0JkqI/AAAAAAAANoY/Gv9pwdRFTZYcfiVXv87UhVeyAsyeQW2ywCLcBGAsYHQ/s1036/%25D8%25B5%25D9%2588%25D8%25B1%25D8%25A9%2B%25D8%25B9%25D9%2584%25D8%25A7%25D9%2585%25D8%25A9%2B%25D8%25A7%25D8%25B3%25D8%25AA%25D9%2581%25D9%2587%25D8%25A7%25D9%2585%2BPNG%2B%25285%2529.jpg' },
-    { name: 'قريبا', desc: 'قريبا', price: 0, image: 'https://1.bp.blogspot.com/-xUGA96OWWI4/X6re3K0JkqI/AAAAAAAANoY/Gv9pwdRFTZYcfiVXv87UhVeyAsyeQW2ywCLcBGAsYHQ/s1036/%25D8%25B5%25D9%2588%25D8%25B1%25D8%25A9%2B%25D8%25B9%25D9%2584%25D8%25A7%25D9%2585%25D8%25A9%2B%25D8%25A7%25D8%25B3%25D8%25AA%25D9%2581%25D9%2587%25D8%25A7%25D9%2585%2BPNG%2B%25285%2529.jpg' },
-    { name: 'قريبا', desc: 'قريبا', price: 0, image: 'https://1.bp.blogspot.com/-xUGA96OWWI4/X6re3K0JkqI/AAAAAAAANoY/Gv9pwdRFTZYcfiVXv87UhVeyAsyeQW2ywCLcBGAsYHQ/s1036/%25D8%25B5%25D9%2588%25D8%25B1%25D8%25A9%2B%25D8%25B9%25D9%2584%25D8%25A7%25D9%2585%25D8%25A9%2B%25D8%25A7%25D8%25B3%25D8%25AA%25D9%2581%25D9%2587%25D8%25A7%25D9%2585%2BPNG%2B%25285%2529.jpg' }
-  ];
+  <div id="order-popup" class="order-modal" aria-hidden="true">
+    <button class="modal-close" id="modal-close">✕</button>
+    <h3>طلب المنتج</h3>
+    <form id="order-form" action="https://formsubmit.co/altybyr594@gmail.com" method="POST" target="_blank">
+      <input type="hidden" name="المنتج" id="hidden-product" value="">
+      <label class="label">اسمك</label>
+      <input type="text" name="الاسم" required>
+      <label class="label">رقم الهاتف أو البريد</label>
+      <input type="text" name="التواصل" required>
+      <button type="submit" class="btn btn-primary">إرسال الطلب</button>
+    </form>
+    <p class="note">بعد الإرسال ستتلقى رسالة تأكيد — يرجى تفعيل البريد من FormSubmit إن كانت هذه المرة الأولى.</p>
+  </div>
 
-  const productsContainer = document.getElementById('products');
-  const orderPopup = document.getElementById('order-popup');
-  const orderOverlay = document.getElementById('order-overlay');
-  const orderForm = document.getElementById('order-form');
-  const hiddenProductInput = document.getElementById('hidden-product');
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 كود ستور — جميع الحقوق محفوظة</div>
+      <div class="foot-note">جميع الأسعار بالريال — لا يشمل الطلب الدفع الفوري.</div>
+    </div>
+  </footer>
 
-  let currentProduct = '';
-
-  function renderProducts() {
-    productsContainer.innerHTML = '';
-    products.forEach(product => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}">
-        <h3>${product.name}</h3>
-        <p>${product.desc}</p>
-        <div class="price">${product.price} ريال</div>
-        <button class="order-btn" data-product="${product.name}">طلب</button>
-      `;
-      productsContainer.appendChild(card);
+  <script src="scripts.js"></script>
+  <script>
+    // init with hash category if present
+    const hash = location.hash ? location.hash.replace('#','') : 'fivem';
+    renderProducts(hash);
+    // set active tab
+    document.querySelectorAll('.tab').forEach(t=>{
+      t.addEventListener('click', ()=> renderProducts(t.dataset.cat));
+      if (t.dataset.cat === hash) t.classList.add('active');
     });
-
-    // إضافة حدث لأزرار الطلب
-    document.querySelectorAll('.order-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        currentProduct = e.target.getAttribute('data-product');
-        openOrderPopup(currentProduct);
-      });
-    });
-  }
-
-  function openOrderPopup(productName) {
-    hiddenProductInput.value = productName;
-    orderPopup.classList.add('active');
-    orderOverlay.classList.add('active');
-  }
-
-  orderOverlay.addEventListener('click', closeOrderPopup);
-
-  function closeOrderPopup() {
-    orderPopup.classList.remove('active');
-    orderOverlay.classList.remove('active');
-    orderForm.reset();
-  }
-
-  window.onload = renderProducts;
-</script>
-
+  </script>
 </body>
 </html>
