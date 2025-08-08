@@ -54,7 +54,7 @@ const productsDB = {
   ],
   designs: [
     {name:'بكج 60 لعبه محاكي ',desc:'افضل العاب المحكاه 60 لعبه',price:35,image:'https://media.discordapp.net/attachments/1222409323909615706/1403381282821378058/Screenshot_2025-08-08_071554.png?ex=6897582b&is=689606ab&hm=5fabc2047979a9aee8b3cd42a711c6802fc972f450791a1a5bbd9760f8bd948a&=&format=webp&quality=lossless'},
-    {name:'بكج 40 لعبه رعب',desc:'افضل العاب رعب 40 لبه',price:35,image:'https://media.discordapp.net/attachments/1222409323909615706/1403383977850572810/Screenshot_2025-08-08_072635.png?ex=68975aad&is=6896092d&hm=fdce2734785ac6e54274b3b81abbba1e777b47241a8df5f629a0a9b5259db731&=&format=webp&quality=lossless'},
+    {name:'بكج 40 لعبه رعب',desc:'افضل العاب رعب 40 لعبه',price:35,image:'https://media.discordapp.net/attachments/1222409323909615706/1403383977850572810/Screenshot_2025-08-08_072635.png?ex=68975aad&is=6896092d&hm=fdce2734785ac6e54274b3b81abbba1e777b47241a8df5f629a0a9b5259db731&=&format=webp&quality=lossless'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
     {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
@@ -226,3 +226,4 @@ document.querySelector('.modal-close').addEventListener('click', () => {
   document.querySelector('.overlay').classList.remove('active');
   document.querySelector('.order-modal').classList.remove('active');
 });
+
