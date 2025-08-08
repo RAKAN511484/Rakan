@@ -1,55 +1,228 @@
-const products = [
-  { name: 'نظام حجوزات احترافي', desc: 'نظام للمطاعم والصالونات', price: 499, image: 'https://via.placeholder.com/300x200?text=منتج+1' },
-  { name: 'موقع عقارات متكامل', desc: 'منصة لبيع وتأجير العقارات', price: 899, image: 'https://via.placeholder.com/300x200?text=منتج+2' },
-  { name: 'متجر إلكتروني حديث', desc: 'واجهة متجر احترافية', price: 699, image: 'https://via.placeholder.com/300x200?text=منتج+3' },
-  { name: 'نظام إدارة طلاب', desc: 'لوحة تحكم لبيانات الطلاب', price: 399, image: 'https://via.placeholder.com/300x200?text=منتج+4' },
-  { name: 'موقع شخصي ديناميكي', desc: 'سيرة ذاتية تفاعلية', price: 299, image: 'https://via.placeholder.com/300x200?text=منتج+5' },
-  { name: 'نظام فواتير', desc: 'تتبع الفواتير وتصدير PDF', price: 349, image: 'https://via.placeholder.com/300x200?text=منتج+6' },
-  { name: 'نظام دعم فني', desc: 'إدارة التذاكر والدعم', price: 459, image: 'https://via.placeholder.com/300x200?text=منتج+7' }
-];
+/* scripts.js - luxury store logic (rendering + modal order form) */
 
-const productsContainer = document.getElementById('products');
-const modal = document.getElementById('orderModal');
-const orderForm = document.getElementById('orderForm');
-const productNameField = document.getElementById('productName');
+/* === PRODUCTS DATA ===
+   each category has 10 items (you can replace placeholders by real images/description)
+*/
+const productsDB = {
+  fivem: [
+    {name:'خزنه الاسلحه فايف ام',desc:'خزنه مليئه بل اسلحه المميزه',price:50,image:'https://media.discordapp.net/attachments/1222409323909615706/1403048437234270300/Screenshot_2025-05-15_084157.png?ex=6896caee&is=6895796e&hm=ef897362c7973baec8e1884db1a35a28a0c13ca4c068fbbb778b25959bd706b1&=&format=webp&quality=lossless'},
+    {name:'بحث الاسلحه',desc:'تفتح لك متجر بي اسم الايتم الذي وضعته',price:12,image:'https://media.discordapp.net/attachments/1222409323909615706/1403050027147857991/Screenshot_2025-08-07_091944.png?ex=6896cc69&is=68957ae9&hm=0824c41d83435ec67fe0eb15ede5838c9bbb94aa57bfeabec01d5f82dbfd63a7&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'}
+  ],
+  subscriptions: [
+    {name:'اشتراك نيتفليكس مدى الحياه',desc:'تابع مسلسلك المفضل في اشتراك مدى الحياه بجوده رائعه',price:35,image:'https://arabhardware.net/storage/uploads/2021-07/netflexmain60f0e6f2b818e.jpg'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'}
+  ],
+  discord: [
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'}
+  ],
+  websites: [
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'}
+  ],
+  designs: [
+    {name:'بكج 60 لعبه محاكي ',desc:'افضل العاب المحكاه 60 لعبه',price:35,image:'https://media.discordapp.net/attachments/1222409323909615706/1403381282821378058/Screenshot_2025-08-08_071554.png?ex=6897582b&is=689606ab&hm=5fabc2047979a9aee8b3cd42a711c6802fc972f450791a1a5bbd9760f8bd948a&=&format=webp&quality=lossless'},
+    {name:'بكج 40 لعبه رعب',desc:'افضل العاب رعب 40 لبه',price:35,image:'https://media.discordapp.net/attachments/1222409323909615706/1403383977850572810/Screenshot_2025-08-08_072635.png?ex=68975aad&is=6896092d&hm=fdce2734785ac6e54274b3b81abbba1e777b47241a8df5f629a0a9b5259db731&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'},
+    {name:'قريبا',desc:'قريبا',price:0,image:'https://media.discordapp.net/attachments/1222409323909615706/1403373044772110366/Screenshot_2025-08-08_064317.png?ex=6897507f&is=6895feff&hm=8fb94297355b655621cec38ec7d650cc2c1b9c8ce9c072ab0f07e7c928c70e2b&=&format=webp&quality=lossless'}
+  ]
+};
 
-products.forEach(product => {
-  const card = document.createElement('div');
-  card.className = 'product-card';
-  card.innerHTML = `
-    <img src="${product.image}" alt="${product.name}">
-    <h3>${product.name}</h3>
-    <p>${product.desc}</p>
-    <div class="price">${product.price} ريال</div>
-    <button onclick="openOrderModal('${product.name}')">طلب</button>
+/* === RENDERING FUNCTIONS === */
+function productCard(product){
+  return `
+    <div class="product">
+      <div class="thumb"><img src="${product.image}" alt="${escapeHtml(product.name)}"></div>
+      <h3>${escapeHtml(product.name)}</h3>
+      <p>${escapeHtml(product.desc)}</p>
+      <div class="price-row">
+        <div class="price">${product.price} ر.س</div>
+        <button class="order-btn" data-product="${escapeHtml(product.name)}">طلب</button>
+      </div>
+    </div>
   `;
-  productsContainer.appendChild(card);
-});
-
-function openOrderModal(productName) {
-  modal.classList.remove('hidden');
-  productNameField.value = productName;
 }
 
-orderForm.onsubmit = function(e) {
-  e.preventDefault();
-  const name = document.getElementById('customerName').value;
-  const contact = document.getElementById('customerContact').value;
-  const product = productNameField.value;
+function renderFeaturedProducts(){
+  const container = document.getElementById('featured-products');
+  if(!container) return;
+  container.innerHTML = '';
+  // take first two from each category
+  Object.keys(productsDB).forEach(cat=>{
+    productsDB[cat].slice(0,2).forEach(p=>{
+      const wrapper = document.createElement('div');
+      wrapper.className = 'product';
+      wrapper.innerHTML = productCard(p);
+      container.appendChild(wrapper);
+    });
+  });
+  attachOrderListeners();
+}
 
-  alert(`شكراً لطلبك للمنتج "${product}" سيتم التواصل معك على "${contact}".\\nملاحظة: لم يتم الدفع حتى الآن، ولكن سيتم التواصل معك لإتمام الدفع وتسليم المنتج.`);
+function renderProducts(category){
+  // set active tab visuals (if on products page)
+  document.querySelectorAll('.tab').forEach(t=> t.classList.remove('active'));
+  const activeTab = document.querySelector(`.tab[data-cat="${category}"]`);
+  if(activeTab) activeTab.classList.add('active');
 
-  // إرسال البيانات إلى بريدك (عبر formsubmit)
-  fetch("https://formsubmit.co/ajax/altybyr594@gmail.com", {
-    method: "POST",
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      المنتج: product,
-      الاسم: name,
-      التواصل: contact
-    })
+  const section = document.getElementById('products-section') || document.getElementById('products');
+  if(!section) return;
+  section.innerHTML = '';
+
+  const list = productsDB[category] || [];
+  list.forEach(p=>{
+    const div = document.createElement('div');
+    div.className = 'product';
+    div.innerHTML = `
+      <div class="thumb"><img src="${p.image}" alt="${escapeHtml(p.name)}"></div>
+      <h3>${escapeHtml(p.name)}</h3>
+      <p>${escapeHtml(p.desc)}</p>
+      <div class="price-row">
+        <div class="price">${p.price} ر.س</div>
+        <button class="order-btn" data-product="${escapeHtml(p.name)}">طلب</button>
+      </div>
+    `;
+    section.appendChild(div);
+  });
+  attachOrderListeners();
+  // scroll to top of products
+  section.scrollIntoView({behavior:'smooth'});
+}
+
+/* attach click listeners to order buttons */
+function attachOrderListeners(){
+  document.querySelectorAll('.order-btn').forEach(btn=>{
+    btn.removeEventListener('click', orderClickHandler);
+    btn.addEventListener('click', orderClickHandler);
+  });
+}
+
+/* order click handler */
+function orderClickHandler(e){
+  const name = e.currentTarget.getAttribute('data-product');
+  openOrderModal(name);
+}
+
+/* open modal and fill hidden input */
+function openOrderModal(productName){
+  const overlay = document.getElementById('order-overlay');
+  const modal = document.getElementById('order-popup');
+  const hidden = document.getElementById('hidden-product');
+  if(!overlay || !modal || !hidden) return;
+  hidden.value = productName;
+  overlay.classList.add('active');
+  modal.classList.add('active');
+  modal.setAttribute('aria-hidden','false');
+}
+
+/* close modal */
+function closeModal(){
+  const overlay = document.getElementById('order-overlay');
+  const modal = document.getElementById('order-popup');
+  if(overlay) overlay.classList.remove('active');
+  if(modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden','true');
+    const form = modal.querySelector('form');
+    if(form) form.reset();
+  }
+}
+
+/* utility: escape html (small) */
+function escapeHtml(text){
+  return text.replace(/[&<>"']/g, function(m){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+  });
+}
+
+/* init modal close listener */
+document.addEventListener('click', function(e){
+  if(e.target && e.target.id === 'order-overlay') closeModal();
+  if(e.target && e.target.id === 'modal-close') closeModal();
+});
+
+/* on products page: tabs */
+document.addEventListener('DOMContentLoaded', function(){
+  // if tabs exist, hook
+  document.querySelectorAll('.tab').forEach(btn=>{
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      this.classList.add('active');
+      renderProducts(this.dataset.cat);
+    });
   });
 
-  modal.classList.add('hidden');
-  orderForm.reset();
-};
+  // If products.html opened with hash = category, or clicked quick link
+  const catFromHash = location.hash ? location.hash.replace('#','') : null;
+  if(document.getElementById('products-section')){
+    const defaultCat = catFromHash || 'fivem';
+    // set active tab if present
+    const tabBtn = document.querySelector(`.tab[data-cat="${defaultCat}"]`);
+    if(tabBtn) tabBtn.classList.add('active');
+    renderProducts(defaultCat);
+  }
+
+  // Attach close button listener
+  const modalClose = document.getElementById('modal-close');
+  if(modalClose) modalClose.addEventListener('click', closeModal);
+});
+
+// تفعيل نافذة الطلب
+document.querySelectorAll('.order-btn').forEach(btn => {
+  btn.addEventListener('click', e => {
+    const productName = e.target.getAttribute('data-product');
+    document.getElementById('hidden-product').value = productName;
+
+    document.querySelector('.overlay').classList.add('active');
+    document.querySelector('.order-modal').classList.add('active');
+  });
+});
+
+// إغلاق النافذة عند الضغط على الخلفية أو زر الإغلاق
+document.querySelector('.overlay').addEventListener('click', () => {
+  document.querySelector('.overlay').classList.remove('active');
+  document.querySelector('.order-modal').classList.remove('active');
+});
+
+document.querySelector('.modal-close').addEventListener('click', () => {
+  document.querySelector('.overlay').classList.remove('active');
+  document.querySelector('.order-modal').classList.remove('active');
+});
